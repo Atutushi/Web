@@ -1,0 +1,2860 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taquería "El Botudo" - Catálogo Digital</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Playfair+Display:wght@700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        :root {
+            --rojo-pasion: #E63946;
+            --amarillo-oro: #F4A261;
+            --verde-agave: #2A9D8F;
+            --negro-profundo: #264653;
+            --blanco-crema: #F8F9FA;
+            --beige: #E9C46A;
+
+            --sombra: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --transicion: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --borde: 2px solid rgba(233, 196, 106, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--blanco-crema);
+            color: var(--negro-profundo);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Header Persuasivo */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1551504734-5ee1c4a1479b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 110vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--blanco-crema);
+            clip-path: polygon(100% 0, 0% 100%, 100% 0%);
+        }
+
+        .botudo {
+            font-family: cursive;
+            border-bottom: 2px solid var(--amarillo-oro);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            color: var(--amarillo-oro);
+            opacity: 0;
+            animation: fadeInScale 1s ease-out forwards;
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards 0.5s;
+        }
+
+        .btn-destacado {
+            display: inline-block;
+            background: var(--rojo-pasion);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transicion);
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards 1s;
+        }
+
+        .btn-destacado:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(230, 57, 70, 0.5);
+            background: #f02a3a;
+        }
+
+        /* Navegación Persuasiva */
+        nav {
+            background: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            flex-wrap: wrap;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: var(--negro-profundo);
+            font-size: 1.8rem;
+            z-index: 101;
+        }
+
+        .nav-logo span {
+            color: var(--rojo-pasion);
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--negro-profundo);
+            z-index: 101;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-item {
+            margin-left: 2rem;
+        }
+
+        .nav-item:first-child {
+             margin-left: 0;
+        }
+
+        .nav-link {
+            color: var(--negro-profundo);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: var(--transicion);
+            position: relative;
+            padding: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--rojo-pasion);
+            transition: var(--transicion);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--amarillo-oro);
+            color: var(--negro-profundo);
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-left: 1.5rem;
+            transition: var(--transicion);
+        }
+
+        .nav-cta:hover {
+            background: var(--rojo-pasion);
+            color: white;
+        }
+
+        .nav-cta:hover::after {
+            display: none;
+        }
+
+        /* Catálogo de Productos */
+        .catalogo {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: var(--negro-profundo);
+            font-family: 'Playfair Display', serif;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--amarillo-oro);
+        }
+
+        .filtros {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filtro-btn {
+            background: none;
+            border: 2px solid var(--negro-profundo);
+            padding: 0.7rem 1.5rem;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: var(--negro-profundo);
+            cursor: pointer;
+            transition: var(--transicion);
+            border-radius: 50px;
+        }
+
+        .filtro-btn.active,
+        .filtro-btn:hover {
+            background: var(--rojo-pasion);
+            color: white;
+            border-color: var(--rojo-pasion);
+        }
+
+        .productos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .producto-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--sombra);
+            transition: var(--transicion);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .producto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .producto-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--rojo-pasion);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .producto-img-container {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .producto-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transicion);
+        }
+
+        .producto-card:hover .producto-img {
+            transform: scale(1.1);
+        }
+
+        .producto-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .producto-categoria {
+            color: var(--verde-agave);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .producto-nombre {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            color: var(--negro-profundo);
+        }
+
+        .producto-desc {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+
+        .producto-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .producto-precio {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--rojo-pasion);
+        }
+        .producto-precio-por-kg {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--negro-profundo);
+        }
+
+
+        .producto-btn {
+            background: var(--amarillo-oro);
+            color: var(--negro-profundo);
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transicion);
+            display: flex;
+            align-items: center;
+        }
+
+        .producto-btn i {
+            margin-right: 0.5rem;
+        }
+
+        .producto-btn:hover {
+            background: var(--rojo-pasion);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* Styles for by-weight products */
+        .producto-controles-peso {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+            align-items: center;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .producto-controles-peso input[type="number"] {
+            width: 80px; /* Slightly wider for number input */
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .producto-controles-peso select {
+            padding: 0.5rem;
+            border: 1px solid #ddd; /* Reverted to default-like border */
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            color: var(--negro-profundo);
+            background-color: white; /* Reverted to white background */
+            transition: none; /* Removed transition */
+            appearance: menulist-button; /* Reverted to default appearance */
+            -webkit-appearance: menulist-button;
+            -moz-appearance: menulist-button;
+            background-image: none; /* Removed custom arrow */
+            background-repeat: initial;
+            background-position: initial;
+            background-size: initial;
+            padding-right: 1rem; /* Reset padding */
+        }
+
+        .producto-btn-peso {
+             background: var(--verde-agave);
+             color: white;
+             width: 100%;
+        }
+        .producto-btn-peso:hover {
+            background: #228A7D;
+        }
+
+        .visually-hidden {
+             position: absolute;
+             width: 1px;
+             height: 1px;
+             margin: -1px;
+             padding: 0;
+             overflow: hidden;
+             clip: rect(0, 0, 0, 0);
+             border: 0;
+        }
+
+
+        /* Testimonios */
+        .testimonios {
+            background: var(--negro-profundo);
+            color: white;
+            padding: 5rem 2rem;
+            margin: 5rem 0;
+        }
+
+        .testimonios-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonios-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--amarillo-oro);
+        }
+
+        .testimonios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonio-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+            border: var(--borde);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .testimonio-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .testimonio-text::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -0.5rem;
+            font-size: 3rem;
+            color: rgba(233, 196, 106, 0.3);
+            font-family: serif;
+        }
+
+        .testimonio-autor {
+            display: flex;
+            align-items: center;
+        }
+
+        .testimonio-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 2px solid var(--amarillo-oro);
+        }
+
+        .testimonio-nombre {
+            font-weight: 700;
+        }
+
+        .testimonio-rating {
+            color: var(--amarillo-oro);
+            margin-top: 0.3rem;
+        }
+
+        /* CTA Final */
+        .cta-final {
+            background: linear-gradient(135deg, var(--rojo-pasion), var(--amarillo-oro));
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .cta-title {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-text {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--negro-profundo);
+            color: white;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-col {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--amarillo-oro);
+        }
+
+        .footer-desc {
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transicion);
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            background: var(--amarillo-oro);
+            color: var(--negro-profundo);
+            transform: translateY(-5px);
+        }
+
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: var(--amarillo-oro);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-link {
+            margin-bottom: 1rem;
+        }
+
+        .footer-link a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: var(--transicion);
+        }
+
+        .footer-link a:hover {
+            opacity: 1;
+            color: var(--amarillo-oro);
+            padding-left: 5px;
+        }
+
+        .footer-contacto p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-contacto i {
+            margin-right: 0.8rem;
+            color: var(--amarillo-oro);
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Botón flotante de WhatsApp y Etiqueta */
+        .whatsapp-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            z-index: 100;
+        }
+
+        .whatsapp-float {
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transicion);
+            animation: bounce 2s infinite;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+             margin-top: 15px;
+        }
+
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        .whatsapp-label {
+             background-color: rgba(37, 211, 102, 0.9);
+             color: white;
+             padding: 8px 15px;
+             border-radius: 10px;
+             font-size: 0.9rem;
+             font-weight: 600;
+             white-space: nowrap;
+             transition: all 0.3s ease-out;
+             z-index: 1;
+             position: static;
+             margin-bottom: 0;
+             margin-right: 0;
+             cursor: pointer; /* Make the label clickable */
+        }
+
+        .whatsapp-label::after {
+             content: '';
+             position: absolute;
+             width: 0;
+             height: 0;
+             border-left: 8px solid transparent;
+             border-right: 8px solid transparent;
+             border-top: 8px solid rgba(37, 211, 102, 0.9);
+             bottom: -8px;
+             right: 15px;
+             transform: translateX(50%);
+        }
+
+
+        /* Modal de WhatsApp */
+        .whatsapp-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: flex-start;
+            overflow-y: auto;
+            padding: 20px 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .whatsapp-modal.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .whatsapp-modal-content {
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--sombra);
+            transform: translateY(-50px);
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-modal.show .whatsapp-modal-content {
+            transform: translateY(0);
+        }
+
+        .whatsapp-header {
+            background-color: #075E54;
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .whatsapp-header h2 {
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .whatsapp-header h2 i {
+            font-size: 1.8rem;
+        }
+
+        .close-whatsapp {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .close-whatsapp:hover {
+            transform: rotate(90deg);
+        }
+
+        .whatsapp-body {
+            padding: 2rem;
+        }
+
+        .whatsapp-form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .whatsapp-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--negro-profundo);
+        }
+
+        .whatsapp-form-group input[type="text"],
+        .whatsapp-form-group input[type="number"],
+        .whatsapp-form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--negro-profundo);
+            background-color: var(--blanco-crema);
+        }
+
+         .whatsapp-form-group select {
+             width: 100%;
+             padding: 0.8rem 1rem;
+             border: 1px solid #ddd; /* Reverted to default-like border */
+             border-radius: 5px;
+             font-family: 'Montserrat', sans-serif;
+             font-size: 1rem;
+             color: var(--negro-profundo);
+             background-color: white; /* Reverted to white background */
+             transition: none; /* Removed transition */
+             appearance: menulist-button; /* Reverted to default appearance */
+             -webkit-appearance: menulist-button;
+             -moz-appearance: menulist-button;
+             background-image: none; /* Removed custom arrow */
+             background-repeat: initial;
+             background-position: initial;
+             background-size: initial;
+             padding-right: 1rem; /* Reset padding */
+         }
+
+        .whatsapp-form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .whatsapp-summary {
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+        }
+
+        .whatsapp-summary h3 {
+            margin-bottom: 1rem;
+            color: var(--negro-profundo);
+        }
+
+        .whatsapp-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .whatsapp-item:last-child {
+            border-bottom: none;
+        }
+
+        .whatsapp-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--amarillo-oro);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .whatsapp-submit {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transicion);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .whatsapp-submit:hover {
+            background-color: #128C7E;
+        }
+        .whatsapp-submit:disabled {
+            background-color: #9fd4b7;
+            cursor: not-allowed;
+        }
+        .whatsapp-submit .fa-spinner {
+            margin-right: 8px;
+        }
+
+
+        .item-actions {
+            margin-left: 15px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .quantity-btn,
+        .delete-btn {
+            background: var(--blanco-crema);
+            border: var(--borde);
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transicion);
+            color: var(--negro-profundo);
+            padding: 0;
+        }
+
+        .quantity-btn:hover {
+            background: var(--verde-agave);
+            color: white;
+            border-color: var(--verde-agave);
+        }
+
+        .delete-btn {
+            color: var(--rojo-pasion);
+            border-color: rgba(230, 57, 70, 0.3);
+        }
+
+        .delete-btn:hover {
+            background: var(--rojo-pasion);
+            color: white;
+        }
+
+        .increase {
+            background: var(--blanco-crema);
+            border-color: #1da85090;
+            color: #1da850;
+        }
+
+        .increase:hover {
+            background: #1da850;
+            border-color: #1da850;
+            color: white;
+        }
+
+        .decrease {
+            background: var(--blanco-crema);
+            border-color: rgba(230, 57, 70, 0.3);
+            color: var(--rojo-pasion);
+        }
+
+        .decrease:hover {
+            background: var(--rojo-pasion);
+            border-color: var(--rojo-pasion);
+        }
+
+        .whatsapp-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(233, 196, 106, 0.2);
+        }
+
+        .item-info {
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-right: 15px;
+        }
+
+        .item-info span:first-child {
+            font-weight: 600;
+            color: var(--negro-profundo);
+        }
+
+        .item-info span:last-child {
+            font-weight: 700;
+            color: var(--negro-profundo);
+        }
+
+        .quantity-btn:active,
+        .delete-btn:active {
+            transform: scale(0.9);
+        }
+
+        /* Notificación base */
+        .notification {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .notification.success {
+            background-color: #25D366;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        }
+
+        .notification.error {
+            background-color: var(--rojo-pasion);
+            box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
+        }
+
+        .notification.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .notification i {
+            font-size: 1.2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+
+        /* Applying animations with staggered delays */
+        .producto-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .producto-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .producto-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .producto-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .producto-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .producto-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .producto-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+
+        .testimonio-card {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .testimonio-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .testimonio-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .testimonio-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        .cta-final .cta-container {
+             animation: fadeInUp 1s ease-out forwards 0.2s;
+        }
+
+        .footer-col {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .footer-col:nth-child(1) { animation-delay: 0.1s; }
+        .footer-col:nth-child(2) { animation-delay: 0.2s; }
+        .footer-col:nth-child(3) { animation-delay: 0.3s; }
+        .footer-col:nth-child(4) { animation-delay: 0.4s; }
+
+
+        /* Responsive Navigation */
+        @media (max-width: 992px) {
+            .nav-container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -250px;
+                width: 250px;
+                height: 100%;
+                background-color: white;
+                flex-direction: column;
+                padding: 6rem 2rem 2rem;
+                box-shadow: -2px 0 15px rgba(0, 0, 0, 0.1);
+                transition: right 0.3s ease-in-out;
+                z-index: 99;
+                overflow-y: auto;
+            }
+
+            .nav-menu.open {
+                right: 0;
+            }
+
+            .nav-item {
+                margin: 1rem 0;
+            }
+
+             .nav-item:first-child {
+                 margin-top: 0;
+             }
+
+            .nav-link {
+                color: var(--negro-profundo);
+                 font-size: 1.1rem;
+                width: 100%;
+                 padding: 0.8rem 0;
+            }
+
+            .nav-link::after {
+                 background: var(--amarillo-oro);
+                 height: 2px;
+            }
+
+            .nav-cta {
+                 margin-left: 0;
+                 margin-top: 1.5rem;
+                 width: 100%;
+                 text-align: center;
+            }
+
+             .menu-overlay {
+                 display: none;
+                 position: fixed;
+                 top: 0;
+                 left: 0;
+                 width: 100%;
+                 height: 100%;
+                 background: rgba(0, 0, 0, 0.5);
+                 z-index: 98;
+             }
+
+              .menu-overlay.active {
+                  display: block;
+              }
+
+            .logo {
+                font-size: 3.5rem;
+            }
+
+             .whatsapp-container {
+                bottom: 20px;
+                right: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 8px;
+                width: auto;
+             }
+
+             .whatsapp-float {
+                 width: 50px;
+                 height: 50px;
+                 font-size: 25px;
+                 margin-top: 0;
+                 position: static;
+             }
+
+             .whatsapp-label {
+                 display: block;
+                 position: static;
+                 margin-bottom: 0;
+                 margin-right: 0;
+                 padding: 6px 12px;
+                 font-size: 0.8rem;
+                 border-radius: 8px;
+                 white-space: nowrap;
+                 z-index: auto;
+                 align-self: flex-end;
+                 position: relative;
+                 cursor: pointer;
+             }
+
+             .whatsapp-label::after {
+                 content: '';
+                 position: absolute;
+                 width: 0;
+                 height: 0;
+                 border-left: 6px solid transparent;
+                 border-right: 6px solid transparent;
+                 border-top: 6px solid rgba(37, 211, 102, 0.9);
+                 bottom: -6px;
+                 right: 5px;
+                 transform: translateX(0%);
+             }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 100vh;
+            }
+
+             .logo {
+                 font-size: 2rem;
+             }
+
+             .slogan {
+                 font-size: 1rem;
+             }
+
+            .btn-destacado {
+                 padding: 0.8rem 2rem;
+                 font-size: 1rem;
+             }
+
+             .nav-logo {
+                 font-size: 1.5rem;
+             }
+
+             .nav-toggle {
+                 font-size: 1.5rem;
+             }
+
+             .nav-menu {
+                 width: 200px;
+                 right: -200px;
+                 padding: 5rem 1.5rem 1.5rem;
+             }
+
+             .nav-link {
+                 font-size: 1rem;
+                 padding: 0.6rem 0;
+             }
+
+             .nav-cta {
+                 padding: 0.6rem 1.2rem;
+                 font-size: 0.9rem;
+             }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .filtros {
+                 gap: 0.5rem;
+             }
+
+            .filtro-btn {
+                 padding: 0.5rem 1rem;
+                 font-size: 0.9rem;
+            }
+
+             .producto-card {
+                 min-width: unset;
+             }
+
+            .producto-nombre {
+                 font-size: 1.2rem;
+             }
+
+             .producto-desc {
+                 font-size: 0.9rem;
+             }
+
+             .producto-precio {
+                 font-size: 1.4rem;
+             }
+
+             .producto-btn {
+                 padding: 0.5rem 1rem;
+                 font-size: 0.9rem;
+             }
+
+            .testimonios-title {
+                 font-size: 2rem;
+            }
+
+             .testimonio-card {
+                 padding: 1.5rem;
+             }
+
+             .testimonio-text {
+                 font-size: 0.9rem;
+             }
+
+            .cta-title {
+                 font-size: 2rem;
+             }
+
+             .cta-text {
+                 font-size: 1rem;
+             }
+
+              .whatsapp-label {
+                 padding: 5px 10px;
+                 font-size: 0.8rem;
+                 border-radius: 6px;
+             }
+
+             .whatsapp-label::after {
+                 bottom: -6px;
+                 right: 5px;
+                 border-left: 5px solid transparent;
+                 border-right: 5px solid transparent;
+                 border-top: 5px solid rgba(37, 211, 102, 0.9);
+             }
+
+
+             .whatsapp-float {
+                 width: 50px;
+                 height: 50px;
+                 font-size: 25px;
+             }
+
+             .whatsapp-container {
+                bottom: 15px;
+                right: 15px;
+                gap: 6px;
+             }
+
+
+             .whatsapp-modal-content {
+                 width: 95%;
+             }
+
+             .whatsapp-header h2 {
+                 font-size: 1.2rem;
+                 gap: 5px;
+             }
+
+             .whatsapp-header h2 i {
+                 font-size: 1.5rem;
+             }
+
+             .close-whatsapp {
+                 font-size: 1.2rem;
+             }
+
+             .whatsapp-body {
+                 padding: 1.5rem;
+             }
+
+             .whatsapp-form-group input,
+             .whatsapp-form-group select,
+             .whatsapp-form-group textarea {
+                 padding: 0.6rem 0.8rem;
+                 font-size: 0.9rem;
+             }
+
+             .whatsapp-summary {
+                 padding: 1rem;
+             }
+
+             .whatsapp-summary h3 {
+                 font-size: 1.1rem;
+             }
+
+             .whatsapp-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-info {
+                width: 100%;
+                margin-bottom: 10px;
+                padding-right: 0;
+                font-size: 0.9rem;
+            }
+
+             .item-actions {
+                margin-left: 0;
+                align-self: flex-end;
+            }
+
+             .quantity-btn,
+             .delete-btn {
+                 width: 24px;
+                 height: 24px;
+                 font-size: 0.8rem;
+             }
+
+             .whatsapp-total {
+                 font-size: 1rem;
+             }
+
+             .whatsapp-submit {
+                 padding: 0.8rem 1.5rem;
+                 font-size: 1rem;
+             }
+
+             .notification {
+                bottom: 15px;
+                 padding: 8px 15px;
+                 font-size: 0.8rem;
+                 border-radius: 30px;
+             }
+
+             .notification i {
+                 font-size: 0.8rem;
+             }
+         }
+        #nosotros.catalogo {
+            margin-top: 0;
+            margin-bottom: 5rem;
+        }
+    </style>
+
+</head>
+<body>
+    <section id="inicio" class="hero">
+        <h1 class="logo">"El <span class="botudo">Botudo"</span></h1>
+        <p class="slogan">Sabores tradicionales con un toque moderno <br> - Donde la Tradición Cobra Vida en Cada Taco -</p>
+        <a href="#catalogo" class="btn-destacado">Ver Menú Completo</a>
+    </section>
+
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">El <span>Botudo</span></div>
+             <button class="nav-toggle" id="navToggle" aria-label="Mostrar/ocultar menú de navegación">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li class="nav-item"><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li class="nav-item"><a href="#catalogo" class="nav-link">Menú</a></li>
+                <li class="nav-item"><a href="#contacto" class="nav-link">Contacto</a></li>
+                <li class="nav-item"><a href="#catalogo" class="nav-link nav-cta">Haz tu pedido</a></li>
+            </ul>
+        </div>
+    </nav>
+
+     <div class="menu-overlay" id="menuOverlay"></div>
+
+
+    <section id="catalogo" class="catalogo">
+        <h2 class="section-title">Explora Nuestros Irresistibles Sabores</h2>
+
+        <div class="filtros">
+            <button class="filtro-btn active" data-categoria="todo">Todo</button>
+            <button class="filtro-btn" data-categoria="tacos">Tacos</button>
+            <button class="filtro-btn" data-categoria="orden">Orden</button>
+            <button class="filtro-btn" data-categoria="paquetes">Paquetes</button>
+             <button class="filtro-btn" data-categoria="especiales">Especiales</button>
+            <button class="filtro-btn" data-categoria="extras">Extras</button>
+            <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
+            <button class="filtro-btn" data-categoria="postres">Postres</button>
+            <button class="filtro-btn" data-categoria="peso">Carne por Peso</button>
+        </div>
+
+        <div class="productos-grid">
+            <div class="producto-card" data-categoria="tacos">
+                <div class="producto-badge">Más vendido</div>
+                <div class="producto-img-container">
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/dd/7b/20/tacos-de-cecina.jpg" alt="Taco de cecina" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Tacos</span>
+                    <h3 class="producto-nombre">Taco de Cecina</h3>
+                    <p class="producto-desc">Suave, sabrosa y perfecta. Descubre por qué nuestra cecina es la favorita.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="tacos">
+                <div class="producto-img-container">
+                    <img src="https://assets.unileversolutions.com/recipes-v2/252244.png" alt="Taco de longaniza" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Tacos</span>
+                    <h3 class="producto-nombre">Taco de Longaniza</h3>
+                    <p class="producto-desc">Prepárate para la explosión de sabor de nuestra jugosa longaniza con almendras.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="tacos">
+                <div class="producto-img-container">
+                    <img src="https://st.depositphotos.com/1257517/55962/i/950/depositphotos_559627492-stock-photo-tacos-cecina-enchilada-con-guacamole.jpg" alt="Taco de carne enchilada" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Tacos</span>
+                    <h3 class="producto-nombre">Taco de Carne Enchilada</h3>
+                    <p class="producto-desc">Déjate seducir por el color y sabor profundo de nuestra carne enchilada casera.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="tacos">
+                <div class="producto-img-container">
+                    <img src="https://www.cocinavital.mx/wp-content/uploads/2018/12/taco-campechano.jpg" alt="Taco de campechano" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Nuevo</div>
+                    <span class="producto-categoria">Tacos</span>
+                    <h3 class="producto-nombre">Taco Campechano</h3>
+                    <p class="producto-desc">No te decidas por uno, ¡pruébalos juntos! Nuestro Campechano: lo mejor de dos mundos.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$35</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="orden">
+                <div class="producto-img-container">
+                    <img src="https://bodegagarzon.com/wp-content/uploads/2017/10/c.jpg" alt="cecina" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Nuevo</div>
+                    <span class="producto-categoria">Orden</span>
+                    <h3 class="producto-nombre">Orden</h3>
+                    <p class="producto-desc">¡La experiencia completa en un plato! 180gr de tu carne favorita, tortillas a mano, pico de gallo, salsa verde y roja, crema, nopales, cebolla y frijoles de olla.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$170</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="especiales">
+                <div class="producto-img-container">
+                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/JBECRDKR3FDXJIRI2AQOYFHY6I.jpg" alt="Caldo pancita de res" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Nuevo</div>
+                    <span class="producto-categoria">Caldos</span>
+                    <h3 class="producto-nombre">Pancita</h3>
+                    <p class="producto-desc">Tradicional caldo de pancita de res, ideal para empezar el día con energía o recuperarse. Servido con tortillas hechas a mano, cebolla, cilantro y limón.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$90</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="paquetes">
+                <div class="producto-img-container">
+                    <img src="https://scontent.fcvj3-1.fna.fbcdn.net/v/t39.30808-6/486610119_9479295578795601_5034770806320010576_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=3a1ebe&_nc_eui2=AeHtYcDb79i5XYx5owWI5BZQm_sGrFSuxTqb-wasVK7FOoI7Oc_CkJbkXvnk4Sw_7CA&_nc_ohc=HE9d2FDuj7sQ7kNvwHlmJVr&_nc_oc=AdkVkSW4HVnhqgajyrinDRkl6m5Yh45Z941h9p7RjIU0DVFofEWC08Fo6l_dfbpit0RVZeOF-s89CtJL_DDoBCng&_nc_zt=23&_nc_ht=scontent.fcvj3-1.fna&_nc_gid=Bh8UosvU4l0kHHhWJRZfYg&oh=00_AfHyruq17ErVxjsJ26UOQgxBV_HRDMHI_amehM9obV0JKg&oe=681B88A5" alt="Paquete Cecina 1kg" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Paquete</div>
+                    <span class="producto-categoria">Paquetes</span>
+                    <h3 class="producto-nombre">Paquete Cecina (1kg)</h3>
+                    <p class="producto-desc">¡Ideal para compartir! 1kg de nuestra deliciosa cecina, 2 docenas de tortillas hechas a mano, salsas, cebollas, nopales, pico de gallo y crema.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$500</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="paquetes">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1624639644675-6b75d9b44b98?q=80&w=2669&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="parrillada carne enchilada" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Paquetes</span>
+                    <h3 class="producto-nombre">Paquete Carne Enchilada (1kg)</h3>
+                    <p class="producto-desc">Lleva el sabor de "El Botudo" a tu evento. 1kg de carne enchilada y todos los acompañamientos: 2 docenas de tortillas, salsas, cebollas, nopales, pico de gallo y crema.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$460</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="paquetes">
+                <div class="producto-img-container">
+                    <img src="https://static.wixstatic.com/media/e83bde_6cadb53d1341423a8d3c193b75b24b11~mv2.jpeg/v1/fill/w_640,h_474,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/e83bde_6cadb53d1341423a8d3c193b75b24b11~mv2.jpeg" alt="parrillada de longaniza" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Paquetes</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Paquete Longaniza (1kg)</h3>
+                    <p class="producto-desc">La joya almendrada de "El Botudo". 1kg de nuestra longaniza con ese toque especial, acompañada de 2 docenas de tortillas, salsas, y más.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$350</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="paquetes">
+                <div class="producto-img-container">
+                    <img src="https://i.ytimg.com/vi/0tb4hsBAL2Q/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLANQ4LYhATTkyi1O6y-niuKhGkF7w" alt="cecina longaniza" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Nuevo</div>
+                    <span class="producto-categoria">Paquetes</span>
+                    <h3 class="producto-nombre">Paquete Cecina con Longaniza (1kg)</h3>
+                    <p class="producto-desc">La mezcla perfecta. Disfruta 1kg de nuestro paquete mixto (500g cecina, 500g longaniza) con todos los acompañamientos.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$440</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="paquetes">
+                <div class="producto-img-container">
+                    <img src="https://carnesideal.tienda/cdn/shop/products/CRD08-2_0e214d86-19e5-4e22-993e-2a6bfa3e2221_800x.jpg?v=1741048641" alt="cecina carne enchilada" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Paquetes</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Paquete Cecina con Carne Enchilada (1kg)</h3>
+                    <p class="producto-desc">Suavidad y sabor audaz. 1kg de nuestro mixto (500g cecina, 500g carne enchilada) con todas las guarniciones.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$480</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="paquetes">
+                <div class="producto-img-container">
+                    <img src="https://www.trajinerasxochimilco.com.mx/wp-content/uploads/2020/10/carne-asada.jpg" alt="cecina longaniza carne enchilada" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Nuevo</div>
+                    <span class="producto-categoria">Paquetes</span>
+                    <h3 class="producto-nombre">Paquete Mixto (Cecina, Carne Enchilada, Longaniza - 1kg)</h3>
+                    <p class="producto-desc">¡La taquiza épica! 1kg con nuestra selección premium (aprox. 333g de cada carne) y todos los acompañamientos.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$460</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+             <div class="producto-card" data-categoria="peso" data-vendido-por-peso="true" data-precio-kg-cocida="500" data-precio-kg-cruda="350">
+                <div class="producto-img-container">
+                    <img src="https://media-cdn.tripadvisor.com/media/photo-s/0e/dd/7b/20/tacos-de-cecina.jpg" alt="Cecina por peso" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <div class="producto-badge">Por Peso</div>
+                    <span class="producto-categoria">Carne por Peso</span>
+                    <h3 class="producto-nombre">Cecina por Kilo/Gramo</h3>
+                    <p class="producto-desc">Pide la cantidad exacta de cecina que deseas. Se incluyen acompañamientos proporcionalmente (tortillas, salsas, etc. basado en 1kg).</p>
+                    <div class="producto-controles-peso">
+                        <label for="coccion-cecina-1" class="visually-hidden">Cocción:</label>
+                        <select class="coccion-select" id="coccion-cecina-1" aria-label="Tipo de cocción">
+                            <option value="cocida">Cocida</option>
+                            <option value="cruda">Cruda</option>
+                        </select>
+                        <input type="number" class="cantidad-peso" value="250" min="100" step="50" aria-label="Cantidad">
+                        <select class="unidad-peso" aria-label="Unidad">
+                            <option value="gr">gr</option>
+                            <option value="kg">kg</option>
+                        </select>
+                    </div>
+                    <div class="producto-footer">
+                        <span class="producto-precio-kg-display">Precio por kilo $500</span>
+                        <button class="producto-btn producto-btn-peso"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="peso" data-vendido-por-peso="true" data-precio-kg-cocida="460" data-precio-kg-cruda="320">
+                 <div class="producto-img-container">
+                     <img src="https://st.depositphotos.com/1257517/55962/i/950/depositphotos_559627492-stock-photo-tacos-cecina-enchilada-con-guacamole.jpg" alt="Carne Enchilada por peso" class="producto-img">
+                 </div>
+                 <div class="producto-info">
+                     <div class="producto-badge">Por Peso</div>
+                     <span class="producto-categoria">Carne por Peso</span>
+                     <h3 class="producto-nombre">Carne Enchilada por Kilo/Gramo</h3>
+                     <p class="producto-desc">Tu carne enchilada favorita, a tu medida. Acompañamientos proporcionales (basado en 1kg).</p>
+                     <div class="producto-controles-peso">
+                         <label for="coccion-enchilada-1" class="visually-hidden">Cocción:</label>
+                         <select class="coccion-select" id="coccion-enchilada-1" aria-label="Tipo de cocción">
+                             <option value="cocida">Cocida</option>
+                             <option value="cruda">Cruda</option>
+                         </select>
+                         <input type="number" class="cantidad-peso" value="250" min="100" step="50" aria-label="Cantidad">
+                         <select class="unidad-peso" aria-label="Unidad">
+                             <option value="gr">gr</option>
+                             <option value="kg">kg</option>
+                         </select>
+                     </div>
+                     <div class="producto-footer">
+                         <span class="producto-precio-kg-display">Precio por kilo $460</span>
+                         <button class="producto-btn producto-btn-peso"><i class="fas fa-plus"></i> Añadir</button>
+                     </div>
+                 </div>
+             </div>
+
+            <div class="producto-card" data-categoria="peso" data-vendido-por-peso="true" data-precio-kg-cocida="350" data-precio-kg-cruda="250">
+                  <div class="producto-img-container">
+                      <img src="https://assets.unileversolutions.com/recipes-v2/252244.png" alt="Longaniza por peso" class="producto-img">
+                  </div>
+                  <div class="producto-info">
+                      <div class="producto-badge">Por Peso</div>
+                      <span class="producto-categoria">Carne por Peso</span>
+                      <h3 class="producto-nombre">Longaniza por Kilo/Gramo</h3>
+                      <p class="producto-desc">Longaniza almendrada por peso, ¡justo lo que necesitas! Acompañamientos proporcionales (basado en 1kg).</p>
+                      <div class="producto-controles-peso">
+                          <label for="coccion-longaniza-1" class="visually-hidden">Cocción:</label>
+                          <select class="coccion-select" id="coccion-longaniza-1" aria-label="Tipo de cocción">
+                              <option value="cocida">Cocida</option>
+                              <option value="cruda">Cruda</option>
+                          </select>
+                          <input type="number" class="cantidad-peso" value="250" min="100" step="50" aria-label="Cantidad">
+                          <select class="unidad-peso" aria-label="Unidad">
+                              <option value="gr">gr</option>
+                              <option value="kg">kg</option>
+                          </select>
+                      </div>
+                      <div class="producto-footer">
+                          <span class="producto-precio-kg-display">Precio por kilo $350</span>
+                          <button class="producto-btn producto-btn-peso"><i class="fas fa-plus"></i> Añadir</button>
+                      </div>
+                  </div>
+              </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-badge">Nuevo</div>
+                <div class="producto-img-container">
+                    <img src="https://www.tasteofhome.com/wp-content/uploads/2024/09/Avocado-Salsa-Verde_EXPS_TOHD24_277378_EricKleinberg_3.jpg" alt="Salsa verde" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Salsa Verde (1/4 L)</h3>
+                    <p class="producto-desc">Nuestra vibrante salsa verde casera, con el toque justo de picante y frescura. (Vaso de 1/4 litro).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$20</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-img-container">
+                    <img src="https://lacocinadevero.com/wp-content/uploads/2019/09/salsa-roja-mexicana2.jpg" alt="salsa roja" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Salsa Roja (1/4 L)</h3>
+                    <p class="producto-desc">La salsa roja con el toque picante perfecto para tus tacos. (Vaso de 1/4 litro).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$20</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-badge">Nuevo</div>
+                <div class="producto-img-container">
+                    <img src="https://imag.bonviveur.com/pico-de-gallo.jpg" alt="jitomate pico de gallo" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Pico de Gallo (1/4 L)</h3>
+                    <p class="producto-desc">Fresco y lleno de color. Nuestro pico de gallo recién hecho con jitomate, cebolla y cilantro. (Vaso de 1/4 litro).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$25</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-badge">Nuevo</div>
+                <div class="producto-img-container">
+                    <img src="https://www.mexhaus.de/media/image/bb/c7/3c/Mini-nopal.jpg" alt="nopales ceboola" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Nopales con Cebollas (1/4 L)</h3>
+                    <p class="producto-desc">Tiernos nopales asados con cebolla cambray. El acompañamiento ideal. (Vaso de 1/4 litro).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$25</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-img-container">
+                    <img src="https://es.giallozafferano.com/images/3-376/Guacamole_650x433_wm.jpg" alt="guacamole" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Guacamole (1/4 L)</h3>
+                    <p class="producto-desc">Cremoso y lleno de sabor. Agrega nuestro guacamole a tu pedido. (Vaso de 1/4 litro).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$40</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-img-container">
+                    <img src="https://cfyl-wordpress-static-content-dev.s3.amazonaws.com/wp-content/uploads/2020/06/Mexican-Crema-shutterstock_577419388.jpg" alt="crema comida" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Crema (1 L)</h3>
+                    <p class="producto-desc">La crema perfecta para complementar tus tacos y platillos. (1 litro).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$130</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-img-container">
+                    <img src="https://cdn7.kiwilimon.com/ss_secreto/501/501.jpg" alt="nopales" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Orden de Nopales Asados</h3>
+                    <p class="producto-desc">Disfruta una porción generosa de nuestros deliciosos nopales asados con cebolla.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$20</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="extras">
+                <div class="producto-badge">Nuevo</div>
+                <div class="producto-img-container">
+                    <img src="https://delachinampa.mx/wp-content/uploads/2022/03/tortilla-blanca-hecha-a-mano.jpg" alt="Tortillas a mano" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Extras</span>
+                    <h3 class="producto-nombre">Tortillas Hechas a Mano (Docena)</h3>
+                    <p class="producto-desc">Suaves y recién hechas. La base perfecta para tus tacos. (1 docena).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$25</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://kokomexico.com/wp-content/uploads/2022/05/Aguas-Frescas1.jpg" alt="Agua Fresca" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Agua de Sabor (1 Litro)</h3>
+                    <p class="producto-desc">Refresca tu paladar con nuestras aguas frescas del día. Pregunta por los sabores disponibles.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://doctoragua.es/wp-content/uploads/2021/06/AdobeStock_242995705-scaled.jpeg" alt="Agua Fresca" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <h3 class="producto-nombre">Agua de Sabor (1/2 Litro)</h3>
+                    <p class="producto-desc">La porción perfecta de agua fresca para acompañar tu comida.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$18</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1556710807-a9261921475f?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Coca-Cola" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Coca-Cola de Vidrio (500ml)</h3>
+                    <p class="producto-desc">La clásica Coca-Cola en envase de vidrio, ¡bien fría!</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$25</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1639736922169-5f0aa773a068?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Coca-Cola" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Coca-Cola (600ml)</h3>
+                    <p class="producto-desc">La clásica Coca-Cola bien fría para acompañar tus alimentos.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1497515114629-f71d768fd07c?q=80&w=2684&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="café" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <h3 class="producto-nombre">Café de Olla</h3>
+                    <p class="producto-desc">El toque dulce y especiado. Disfruta nuestro tradicional café de olla.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$20</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1598556637015-f515d55608fd?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="mundet" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <h3 class="producto-nombre">Refresco de Manzana (Sidral Mundet)</h3>
+                    <p class="producto-desc">El burbujeante sabor manzana que refresca (600ml).</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$25</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="bebidas">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1592860893757-84536a1c9b82?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="sprite" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Bebidas</span>
+                    <h3 class="producto-nombre">Refresco Sprite (600ml)</h3>
+                    <p class="producto-desc">El burbujeante sabor lima-limón de Sprite que nos llena de alegría.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$25</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="postres">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1637264596042-fcf205a81e1e?q=80&w=2728&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Flan Napolitano" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Postres</span>
+                    <div class="producto-badge">Más vendido</div>
+                    <h3 class="producto-nombre">Flan Napolitano</h3>
+                    <p class="producto-desc">El final dulce perfecto. Suave y cremoso flan napolitano casero.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="producto-card" data-categoria="postres">
+                <div class="producto-img-container">
+                    <img src="https://images.unsplash.com/photo-1654963865384-b9a344a9c0c1?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Helado Napolitano" class="producto-img">
+                </div>
+                <div class="producto-info">
+                    <span class="producto-categoria">Postres</span>
+                    <div class="producto-badge">Nuevo</div>
+                    <h3 class="producto-nombre">Helado Napolitano (Vaso)</h3>
+                    <p class="producto-desc">Un clásico refrescante para terminar tu festín. Combinación de fresa, vainilla y chocolate.</p>
+                    <div class="producto-footer">
+                        <span class="producto-precio">$30</span>
+                        <button class="producto-btn add-to-cart-btn"><i class="fas fa-plus"></i> Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonios">
+        <div class="testimonios-container">
+            <h2 class="testimonios-title">Lo que dicen nuestros clientes</h2>
+
+            <div class="testimonios-grid">
+                <div class="testimonio-card">
+                    <p class="testimonio-text">Los mejores tacos que he probado en mi vida. El sabor auténtico me transportó a una gran mezcla de sabores. ¡Volveré una y otra vez!</p>
+                    <div class="testimonio-autor">
+                        <img src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png" alt="María González" class="testimonio-img">
+                        <div>
+                            <div class="testimonio-nombre">María González</div>
+                            <div class="testimonio-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <p class="testimonio-text">¡Increíble! El paquete mixto es enorme y delicioso. Perfecto para cuando tienes mucha hambre.</p>
+                    <div class="testimonio-autor">
+                        <img src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png" alt="Carlos Martínez" class="testimonio-img">
+                        <div>
+                            <div class="testimonio-nombre">Carlos Martínez</div>
+                            <div class="testimonio-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonio-card">
+                    <p class="testimonio-text">Ambiente agradable, servicio rápido y comida excepcional. ¡Altamente recomendado!</p>
+                    <div class="testimonio-autor">
+                        <img src="https://definicion.de/wp-content/uploads/2019/07/perfil-de-usuario.png" alt="Laura Sánchez" class="testimonio-img">
+                        <div>
+                            <div class="testimonio-nombre">Laura Sánchez</div>
+                            <div class="testimonio-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-final">
+        <div class="cta-container">
+            <h2 class="cta-title">¿Listo para probar la mejor taquería?</h2>
+            <p class="cta-text">Haz tu pedido ahora de manera online y disfruta de nuestra entrega rápida y comida recién hecha. ¡Atrévete a ser parte de esta gran aventura culinaria!</p>
+            <a href="#catalogo" class="btn-destacado">No esperes más <br> ¡Ordenar Ahora!</a>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <div class="footer-logo">El Botudo</div>
+                <p class="footer-desc">Disgusta de nuestros inigualables platillos con sabor a hogar.</p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-title">Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li class="footer-link"><a href="#inicio">Inicio</a></li>
+                    <li class="footer-link"><a href="#catalogo">Menú</a></li>
+                    <li class="footer-link"><a href="#contacto">Contacto</a></li>
+                    <li class="footer-link"><a href="#catalogo">Haz tu pedido</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h3 class="footer-title">Horario</h3>
+                <ul class="footer-links">
+                    <li class="footer-link">Lunes a Viernes: 7:00 am - 15:00 pm</li>
+                    <li class="footer-link">Sábado y Domingo: 7:00 am - 14:00 pm</li>
+                </ul>
+            </div>
+
+            <div id="contacto" class="footer-col">
+                <h3 class="footer-title">Contacto</h3>
+                <div class="footer-contacto">
+                    <p><i class="fas fa-map-marker-alt"></i> Av. Morelos, carretera Jojutla-Taltizapán, Col. Huatecalco, a un costado de la cerámica Divál</p>
+                    <p><i class="fas fa-phone-alt"></i> (52) 777 514 3110</p>
+                    <p><i class="fas fa-phone-alt"></i> (52) 777 207 3675</p>
+                    <p><i class="fas fa-phone-alt"></i> (52) 777 212 0467</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2025 Taquería "El Botudo". Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+     <div class="whatsapp-container">
+         <span class="whatsapp-label" id="whatsappLabel">Enviar Pedido</span> <div class="whatsapp-float" id="whatsappButton" aria-label="Haz tu pedido por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </div>
+
+
+    <div class="whatsapp-modal" id="whatsappModal">
+        <div class="whatsapp-modal-content">
+            <div class="whatsapp-header">
+                <h2><i class="fab fa-whatsapp"></i> Enviar Pedido</h2>
+                <button class="close-whatsapp" id="closeWhatsapp" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="whatsapp-body">
+                <form id="whatsappForm">
+                    <div class="whatsapp-form-group">
+                        <label for="whatsapp-name">Nombre</label>
+                        <input type="text" id="whatsapp-name" required>
+                    </div>
+                    <div class="whatsapp-form-group">
+                        <label for="whatsapp-method">Tipo de pedido</label>
+                        <select id="whatsapp-method" required>
+                            <option value="">Seleccionar...</option>
+                            <option value="Mesa">Comer en local</option>
+                            <option value="Recoger">Para llevar</option>
+                        </select>
+                    </div>
+                    <div class="whatsapp-form-group" id="tableField" style="display: none;">
+                        <label for="whatsapp-table">Número de mesa</label>
+                        <input type="number" id="whatsapp-table" min="1" max="20">
+                    </div>
+                    <div class="whatsapp-summary">
+                        <h3>Resumen de tu pedido</h3>
+                        <div id="whatsapp-order-items"></div>
+                        <div class="whatsapp-total">
+                            <span>Total:</span>
+                            <span id="whatsapp-order-total">$0.00</span>
+                        </div>
+                    </div>
+                    <div class="whatsapp-form-group">
+                        <label for="whatsapp-notes">Notas adicionales (opcional)</label>
+                        <textarea id="whatsapp-notes"></textarea>
+                    </div>
+                    <button type="submit" class="whatsapp-submit">
+                        <i class="fab fa-whatsapp"></i> Enviar Pedido
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notification-message"></span>
+    </div>
+
+    <script>
+        // Helper function for element visibility check (for animations)
+        function isElementInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Function to add 'show' class for animation on scroll
+        function animateOnScroll() {
+            document.querySelectorAll('.producto-card, .testimonio-card, .cta-final .cta-container, .footer-col').forEach(element => {
+                if (isElementInViewport(element)) {
+                    element.style.opacity = 1;
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        window.addEventListener('scroll', animateOnScroll);
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const filtroBtns = document.querySelectorAll('.filtro-btn');
+            const productoCards = document.querySelectorAll('.producto-card');
+
+            filtroBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filtroBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    const categoria = this.dataset.categoria;
+                    productoCards.forEach(card => {
+                        if (categoria === 'todo' || card.dataset.categoria === categoria) {
+                             card.style.display = 'flex'; // Use flex for cards
+                             setTimeout(() => {
+                                 card.style.opacity = 1;
+                                 card.style.transform = 'translateY(0)';
+                             }, 50);
+                        } else {
+                            card.style.opacity = 0;
+                            card.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+
+            function smoothScrollTo(endY, duration) {
+                const startY = window.scrollY;
+                const distanceY = endY - startY;
+                const startTime = performance.now();
+                function step(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeInOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                    window.scrollTo(0, startY + distanceY * easeInOutQuad(progress));
+                    if (elapsed < duration) {
+                        requestAnimationFrame(step);
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    const offset = 80; // Ajusta este valor según la altura de tu barra de navegación fija
+                    if (targetElement) {
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - offset;
+                        // const duration = 800; // Duración del scroll en milisegundos
+                        // smoothScrollTo(targetPosition, duration); // Descomentado para usar scroll suave
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+
+
+                        const navMenu = document.getElementById('navMenu');
+                        const menuOverlay = document.getElementById('menuOverlay');
+                        if (navMenu.classList.contains('open')) {
+                            navMenu.classList.remove('open');
+                            menuOverlay.classList.remove('active');
+                            document.body.style.overflow = 'auto';
+                        }
+                    }
+                });
+            });
+        });
+
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+        const menuOverlay = document.getElementById('menuOverlay');
+
+        function toggleMenu() {
+            navMenu.classList.toggle('open');
+            menuOverlay.classList.toggle('active');
+            if (navMenu.classList.contains('open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+        navToggle.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', toggleMenu);
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const notificationMessage = document.getElementById('notification-message');
+            const iconElement = notification.querySelector('i');
+
+            notification.classList.remove('success', 'error');
+            notification.classList.add(type);
+
+            if (type === 'success') {
+                iconElement.className = 'fas fa-check-circle';
+            } else if (type === 'error') {
+                iconElement.className = 'fas fa-times-circle';
+            }
+
+
+            notificationMessage.textContent = message;
+            notification.offsetWidth; // Trigger reflow
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000); // Aumentado a 3 segundos
+        }
+
+        let cart = [];
+        const whatsappButton = document.getElementById('whatsappButton');
+        const whatsappLabel = document.getElementById('whatsappLabel');
+        const whatsappModal = document.getElementById('whatsappModal');
+        const closeWhatsapp = document.getElementById('closeWhatsapp');
+        const whatsappForm = document.getElementById('whatsappForm');
+        const deliveryMethod = document.getElementById('whatsapp-method');
+        const tableField = document.getElementById('tableField');
+        const orderItemsContainer = document.getElementById('whatsapp-order-items');
+
+        const sanitizeInput = (str) => {
+            if (typeof str !== 'string') return '';
+            return str.replace(/[<>"`&';=\/\\]/gi, '').substring(0, 250); // Ajustado límite y caracteres
+        };
+
+        function initCart() {
+            const savedCart = localStorage.getItem('taqueriaCart');
+            if (savedCart) {
+                try {
+                    cart = JSON.parse(savedCart);
+                } catch (e) {
+                    console.error("Error parsing cart from localStorage:", e);
+                    cart = [];
+                    localStorage.removeItem('taqueriaCart'); // Limpiar carrito corrupto
+                }
+            }
+            updateWhatsappOrderSummary();
+        }
+
+        deliveryMethod.addEventListener('change', function() {
+            const tableInput = document.getElementById('whatsapp-table');
+            if (this.value === 'Mesa') {
+                 tableField.style.display = 'block';
+                 tableInput.setAttribute('required', 'required');
+                 tableInput.focus();
+            } else {
+                 tableField.style.display = 'none';
+                 tableInput.removeAttribute('required');
+                 tableInput.value = ''; // Limpiar valor si no es para mesa
+            }
+        });
+
+         function openWhatsappModal() {
+             if (cart.length === 0) {
+                 showNotification('Agrega productos al pedido primero', 'error');
+                 return;
+             }
+             whatsappModal.style.display = 'flex';
+             setTimeout(() => whatsappModal.classList.add('show'), 10);
+             document.body.style.overflow = 'hidden'; // Evitar scroll del fondo
+         }
+
+         whatsappButton.addEventListener('click', openWhatsappModal);
+         whatsappLabel.addEventListener('click', openWhatsappModal);
+
+
+        function closeModal() {
+            whatsappModal.classList.remove('show');
+            setTimeout(() => {
+                whatsappModal.style.display = 'none';
+                document.body.style.overflow = 'auto'; // Restaurar scroll del fondo
+            }, 300);
+        }
+        closeWhatsapp.addEventListener('click', closeModal);
+        whatsappModal.addEventListener('click', (e) => {
+            if (e.target === whatsappModal) {
+                closeModal();
+            }
+        });
+
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.producto-card');
+                const productName = card.querySelector('.producto-nombre').textContent;
+                const productPriceText = card.querySelector('.producto-precio').textContent;
+                const productPrice = parseFloat(productPriceText.replace('$', ''));
+
+                if (isNaN(productPrice)) {
+                    showNotification('Error: Precio del producto no válido.', 'error');
+                    return;
+                }
+
+                const existingItem = cart.find(item => item.name === productName && !item.isByWeight);
+
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                    existingItem.price = productPrice * existingItem.quantity; // Actualizar el precio total del item
+                    showNotification(`${productName} - Cantidad actualizada: ${existingItem.quantity}`);
+                } else {
+                    const product = {
+                        id: Date.now() + Math.random().toString(36).substr(2, 9), // ID único
+                        name: productName,
+                        unitPrice: productPrice, // Guardar precio unitario
+                        price: productPrice,     // Precio total inicial del item
+                        quantity: 1,
+                        isByWeight: false
+                    };
+                    cart.push(product);
+                    showNotification(`${productName} agregado al pedido`);
+                }
+                updateCartAndStorage();
+                animateButton(this); // Pasar el botón para la animación
+            });
+        });
+
+        document.querySelectorAll('.producto-card[data-vendido-por-peso="true"]').forEach(card => {
+            const quantityInput = card.querySelector('.cantidad-peso');
+            const unitSelect = card.querySelector('.unidad-peso');
+            const coccionSelect = card.querySelector('.coccion-select'); // Corregido de .coccion-cecina
+            const priceDisplay = card.querySelector('.producto-precio-kg-display');
+            const addButton = card.querySelector('.producto-btn-peso');
+
+            function updatePriceDisplayAndLabel() {
+                 const selectedCoccion = coccionSelect.value;
+                 const pricePerKg = selectedCoccion === 'cocida' ?
+                                   parseFloat(card.dataset.precioKgCocida) :
+                                   parseFloat(card.dataset.precioKgCruda);
+                 priceDisplay.textContent = `Precio por Kilo (${selectedCoccion}): $${pricePerKg}`;
+            }
+
+            updatePriceDisplayAndLabel();
+
+            coccionSelect.addEventListener('change', updatePriceDisplayAndLabel);
+            // No es necesario actualizar en input de cantidad o unidad, ya que el precio base por kg no cambia con eso.
+
+
+            addButton.addEventListener('click', function() {
+                const baseProductName = card.querySelector('.producto-nombre').textContent;
+                const selectedCoccion = coccionSelect.value;
+                const pricePerKg = selectedCoccion === 'cocida' ?
+                                   parseFloat(card.dataset.precioKgCocida) :
+                                   parseFloat(card.dataset.precioKgCruda);
+
+                let quantity = parseFloat(quantityInput.value);
+                const unit = unitSelect.value;
+
+                if (isNaN(quantity) || quantity <= 0) {
+                    showNotification('Por favor, ingresa una cantidad válida.', 'error');
+                    quantityInput.focus();
+                    return;
+                }
+                if (unit === 'gr' && quantity < 100) {
+                     showNotification('La cantidad mínima en gramos es 100gr.', 'error');
+                     quantityInput.value = 100;
+                     quantityInput.focus();
+                     return;
+                }
+                 if (unit === 'kg' && (quantity < 0.1 || quantity > 20)) { // Añadido límite superior
+                     showNotification('La cantidad en kg debe ser entre 0.1kg y 20kg.', 'error');
+                     quantityInput.value = Math.max(0.1, Math.min(quantity, 20));
+                     quantityInput.focus();
+                     return;
+                 }
+                 if (unit === 'gr' && quantity > 20000) { // Límite para gramos
+                     showNotification('La cantidad máxima en gramos es 20000gr (20kg).', 'error');
+                     quantityInput.value = 20000;
+                     quantityInput.focus();
+                     return;
+                 }
+
+
+                let itemPrice;
+                let displayQuantity;
+                let weightInKg;
+
+                if (unit === 'gr') {
+                    weightInKg = quantity / 1000;
+                    displayQuantity = `${quantity} gr`;
+                } else { // kg
+                    weightInKg = quantity;
+                    displayQuantity = `${quantity} kg`;
+                }
+                itemPrice = weightInKg * pricePerKg;
+
+                const productNameInCart = `${baseProductName} (${displayQuantity}, ${selectedCoccion})`;
+
+                const product = {
+                    id: Date.now() + Math.random().toString(36).substr(2, 9), // ID único
+                    name: productNameInCart,
+                    price: parseFloat(itemPrice.toFixed(2)), // Precio total del item
+                    quantity: 1, // Para items por peso, la cantidad es siempre 1, el peso está en el nombre/detalle
+                    isByWeight: true,
+                    baseName: baseProductName,
+                    weight: quantity, // Cantidad numérica
+                    unit: unit,       // 'gr' o 'kg'
+                    coccion: selectedCoccion
+                };
+                cart.push(product);
+                showNotification(`${productNameInCart} agregado por $${product.price.toFixed(2)}`);
+
+                updateCartAndStorage();
+                animateButton(this); // Pasar el botón para animación
+            });
+        });
+
+        function animateButton(buttonElement) { // Modificado para aceptar el elemento botón
+            buttonElement.style.transform = 'scale(1.1)';
+            buttonElement.style.boxShadow = '0 0 15px rgba(37, 211, 102, 0.6)';
+            setTimeout(() => {
+                buttonElement.style.transform = '';
+                buttonElement.style.boxShadow = '';
+            }, 250);
+        }
+
+
+        function updateWhatsappOrderSummary() {
+            orderItemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                orderItemsContainer.innerHTML = '<p style="text-align: center; color: #777;">Tu carrito está vacío.</p>';
+                document.getElementById('whatsapp-order-total').textContent = '$0.00';
+                whatsappButton.parentElement.style.display = 'none'; // Ocultar botón flotante si el carrito está vacío
+                return;
+            }
+
+            whatsappButton.parentElement.style.display = 'flex'; // Mostrar botón si hay items
+
+            cart.forEach(item => { // No se necesita el índice aquí si usamos el ID del item
+                total += item.price; // El 'price' del item ya es el total para ese item (unitPrice * quantity o calculado por peso)
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'whatsapp-item';
+
+                let itemDisplayName = item.name;
+                // Para items que no son por peso y tienen cantidad > 1, mostrar cantidad
+                if (!item.isByWeight && item.quantity > 1) {
+                    itemDisplayName += ` (x${item.quantity})`;
+                }
+
+                itemElement.innerHTML = `
+                    <div class="item-info">
+                        <span>${sanitizeInput(itemDisplayName)}</span>
+                        <span>$${item.price.toFixed(2)}</span>
+                    </div>
+                    <div class="item-actions">
+                        ${!item.isByWeight ? `
+                        <button type="button" class="quantity-btn decrease" data-id="${item.id}" aria-label="Disminuir cantidad">-</button>
+                        <button type="button" class="quantity-btn increase" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
+                        ` : ''}
+                        <button type="button" class="delete-btn" data-id="${item.id}" aria-label="Eliminar producto"><i class="fas fa-trash-alt"></i></button>
+                    </div>
+                `;
+                orderItemsContainer.appendChild(itemElement);
+            });
+
+            document.getElementById('whatsapp-order-total').textContent = `$${total.toFixed(2)}`;
+            attachCartItemEventListeners();
+        }
+
+        function attachCartItemEventListeners() {
+            document.querySelectorAll('.whatsapp-item .delete-btn').forEach(btn => {
+                btn.removeEventListener('click', handleDeleteItem); // Prevenir duplicados
+                btn.addEventListener('click', handleDeleteItem);
+            });
+            document.querySelectorAll('.whatsapp-item .decrease').forEach(btn => {
+                btn.removeEventListener('click', handleDecreaseQuantity);
+                btn.addEventListener('click', handleDecreaseQuantity);
+            });
+            document.querySelectorAll('.whatsapp-item .increase').forEach(btn => {
+                btn.removeEventListener('click', handleIncreaseQuantity);
+                btn.addEventListener('click', handleIncreaseQuantity);
+            });
+        }
+
+        function handleDeleteItem() {
+            const itemId = this.dataset.id;
+            const itemIndex = cart.findIndex(item => item.id === itemId);
+            if (itemIndex > -1) {
+                const removedItem = cart.splice(itemIndex, 1)[0];
+                showNotification(`${removedItem.name} eliminado`, 'error');
+                updateCartAndStorage();
+            }
+        }
+
+        function handleDecreaseQuantity() {
+            const itemId = this.dataset.id;
+            const item = cart.find(i => i.id === itemId);
+            if (item && !item.isByWeight) {
+                if (item.quantity > 1) {
+                    item.quantity -= 1;
+                    item.price = item.unitPrice * item.quantity; // Recalcular precio del item
+                    showNotification(`${item.name} - Cantidad: ${item.quantity}`, 'error');
+                } else {
+                    // Si la cantidad es 1 y se disminuye, se elimina el item
+                    const itemIndex = cart.findIndex(i => i.id === itemId);
+                    cart.splice(itemIndex, 1);
+                    showNotification(`${item.name} eliminado`, 'error');
+                }
+                updateCartAndStorage();
+            }
+        }
+
+        function handleIncreaseQuantity() {
+            const itemId = this.dataset.id;
+            const item = cart.find(i => i.id === itemId);
+            if (item && !item.isByWeight) {
+                item.quantity += 1;
+                item.price = item.unitPrice * item.quantity; // Recalcular precio del item
+                showNotification(`${item.name} - Cantidad: ${item.quantity}`);
+                updateCartAndStorage();
+            }
+        }
+
+        function updateCartAndStorage() {
+            updateWhatsappOrderSummary();
+            localStorage.setItem('taqueriaCart', JSON.stringify(cart));
+        }
+
+        async function sendOrderToGoogleSheet(formData) {
+            //                                         AQUÍ ABAJO DEBES PEGAR TU URL
+            //                                                 ↓↓↓↓↓↓↓↓↓↓↓↓
+            const googleScriptWebAppUrl = 'https://script.google.com/macros/s/AKfycbybo_sFBM7TqgvPQ8KiKDbNjkrjKQlEpCHZzFEIL3iVL0SBZKaZ4F-b3iAcCKYFedJT/exec'; // !!! REEMPLAZA ESTO CON TU URL REAL !!!
+            //                                                 ↑↑↑↑↑↑↑↑↑↑↑↑
+            // Asegúrate que la URL esté entre las comillas simples ' '
+
+            if (googleScriptWebAppUrl === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUÍ' || googleScriptWebAppUrl === '') {
+                console.warn('URL de Google Apps Script no configurada. El pedido no se guardará en la hoja de cálculo.');
+                // Opcionalmente, notificar al usuario que no se guardará en Sheets
+                // showNotification("Configuración pendiente: Pedido no guardado en hoja de cálculo.", "error");
+                return; // No continuar si la URL no está configurada
+            }
+
+            try {
+                const response = await fetch(googleScriptWebAppUrl, {
+                    method: 'POST',
+                    mode: 'cors', // Esencial para que el script pueda leer la respuesta
+                    cache: 'no-cache',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    redirect: 'follow', // Seguir redirecciones si las hay (Apps Script a veces redirige)
+                    body: JSON.stringify(formData),
+                });
+
+                // Verificar si la respuesta es OK y es JSON antes de intentar parsearla
+                if (response.ok) {
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        const result = await response.json();
+                        if (result.status === 'success') {
+                            console.log('Pedido enviado y guardado en Google Sheet:', result.message);
+                            // No necesitamos notificar al usuario aquí, ya se notifica el envío a WhatsApp
+                        } else {
+                            console.error('Error reportado por Google Sheet al guardar:', result.message);
+                            showNotification("Error al guardar en hoja de cálculo: " + result.message, "error");
+                        }
+                    } else {
+                         const textResponse = await response.text();
+                         console.warn('Respuesta no JSON de Google Sheet (pero OK):', textResponse);
+                         // Esto puede pasar si el script no devuelve JSON o hay un error HTML.
+                         // Podrías intentar analizarlo si esperas HTML en caso de error del script.
+                         if (textResponse.toLowerCase().includes("error") || textResponse.toLowerCase().includes("excepción")) {
+                            showNotification("Error en script de hoja de cálculo (respuesta no JSON).", "error");
+                         }
+                    }
+                } else {
+                    // Si la respuesta no es OK (ej. 404, 500, error de CORS si no está bien configurado el script)
+                    const errorText = await response.text(); // Intentar obtener más detalles del error
+                    console.error('Error en la solicitud a Google Sheet:', response.status, response.statusText, errorText);
+                    showNotification(`Error (${response.status}) al contactar la hoja de cálculo.`, "error");
+                }
+            } catch (error) {
+                console.error('Excepción al enviar el pedido a Google Sheet:', error);
+                showNotification("No se pudo conectar con la hoja de cálculo.", "error");
+            }
+        }
+
+
+        whatsappForm.addEventListener('submit', async function(e) { // Hacer la función async para await sendOrderToGoogleSheet
+            e.preventDefault();
+            const submitButton = this.querySelector('button[type="submit"]');
+            if (submitButton.disabled) return;
+
+            const nameInput = document.getElementById('whatsapp-name');
+            const methodInput = document.getElementById('whatsapp-method');
+            const tableInput = document.getElementById('whatsapp-table');
+
+            const name = sanitizeInput(nameInput.value.trim());
+            const method = methodInput.value;
+            const table = method === 'Mesa' ? sanitizeInput(tableInput.value.trim()) : '';
+            const notes = sanitizeInput(document.getElementById('whatsapp-notes').value.trim());
+
+            // Validaciones más estrictas
+            if (!name) {
+                showNotification("Por favor, ingresa tu nombre.", "error");
+                nameInput.focus(); return;
+            }
+            if (!method) {
+                showNotification("Por favor, selecciona el tipo de pedido.", "error");
+                methodInput.focus(); return;
+            }
+            if (method === 'Mesa' && !table) {
+                showNotification("Por favor, ingresa el número de mesa.", "error");
+                tableInput.focus(); return;
+            }
+             if (method === 'Mesa' && (isNaN(parseInt(table)) || parseInt(table) < 1 || parseInt(table) > 20 )) {
+                showNotification("Número de mesa inválido (debe ser entre 1 y 20).", "error");
+                tableInput.focus(); return;
+            }
+            if (cart.length === 0) {
+                showNotification("Tu carrito está vacío. Agrega productos antes de enviar.", "error");
+                return;
+            }
+
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+            const itemsTextForWhatsapp = cart.map(item => {
+                let itemName = item.name;
+                if (!item.isByWeight && item.quantity > 1) {
+                     itemName += ` (x${item.quantity})`;
+                }
+                return `🌮 ${sanitizeInput(itemName)} - $${item.price.toFixed(2)}`;
+            }).join('%0A');
+
+            const totalPedido = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+
+            const pedidoDetalleParaSheet = cart.map(item => {
+                 let itemName = item.name;
+                 if (!item.isByWeight && item.quantity > 1) {
+                     itemName += ` (x${item.quantity})`;
+                 }
+                 return `${sanitizeInput(itemName)} - $${item.price.toFixed(2)}`;
+            }).join('; ');
+
+
+            const formDataForSheet = {
+                timestamp: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }),
+                nombre: name,
+                tipoPedido: method,
+                mesa: table || "N/A",
+                pedidoDetalle: pedidoDetalleParaSheet,
+                total: parseFloat(totalPedido), // Enviar como número
+                notas: notes || 'Ninguna'
+            };
+
+            // Enviar a Google Sheet y esperar (opcionalmente)
+            await sendOrderToGoogleSheet(formDataForSheet); // La función sendOrderToGoogleSheet ya maneja sus propios errores/notificaciones
+
+            const whatsappNumber = "5217772073675"; // Asegúrate que el número esté en formato internacional completo sin + ni espacios/guiones
+            const whatsappMessage = `*PEDIDO - EL BOTUDO*%0A%0A` +
+                `*👤 Cliente:* ${encodeURIComponent(name)}%0A` +
+                `${method === 'Mesa' ? `🪑 *Mesa:* ${encodeURIComponent(table)}` : '🚚 *Para llevar*'}` +
+                `%0A%0A*🍽️ Pedido:*%0A${itemsTextForWhatsapp}%0A%0A` +
+                `*💰 Total:* $${totalPedido}%0A%0A` +
+                `*📝 Notas:* ${encodeURIComponent(notes || 'Ninguna')}`;
+
+            window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
+
+            // Retrasar un poco para dar tiempo a que WhatsApp se abra antes de mostrar la notificación de éxito final
+            setTimeout(() => {
+                closeModal();
+                cart = []; // Limpiar carrito
+                localStorage.removeItem('taqueriaCart');
+                updateWhatsappOrderSummary(); // Actualizar UI del carrito
+
+                whatsappForm.reset(); // Limpiar formulario
+                tableField.style.display = 'none';
+                document.getElementById('whatsapp-table').removeAttribute('required');
+
+                showNotification("¡Pedido enviado por WhatsApp! Gracias.", "success");
+
+                submitButton.disabled = false;
+                submitButton.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar Pedido';
+            }, 1800);
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+             initCart();
+             animateOnScroll(); // Para las animaciones iniciales al cargar
+        });
+
+    </script>
+</body>
+</html>
