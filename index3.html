@@ -2691,64 +2691,63 @@
             localStorage.setItem('taqueriaCart', JSON.stringify(cart));
         }
 
-        async function sendOrderToGoogleSheet(formData) {
-            //                                         AQUÍ ABAJO DEBES PEGAR TU URL
+ // --- FUNCIÓN sendOrderToGoogleSheet USANDO FETCH (Compatible con tu script doPost JSON) ---
+ async function sendOrderToGoogleSheet(formData) {
+            //                                         AQUÍ ABAJO DEBES PEGAR TU URL DE DESPLIEGUE DE APPS SCRIPT
             //                                                 ↓↓↓↓↓↓↓↓↓↓↓↓
-            const googleScriptWebAppUrl = 'https://script.google.com/macros/s/AKfycbybo_sFBM7TqgvPQ8KiKDbNjkrjKQlEpCHZzFEIL3iVL0SBZKaZ4F-b3iAcCKYFedJT/exec'; // !!! REEMPLAZA ESTO CON TU URL REAL !!!
+            const googleScriptWebAppUrl = 'https://script.google.com/macros/s/AKfycbzS6Y8ga12qALH5HIGHaBy_sBKBp51Cw5ObOYRWCDzF0uj6KQi5gmQj6qtJ85KZmSg/exec'; // !!! PEGA TU URL REAL AQUÍ !!!
             //                                                 ↑↑↑↑↑↑↑↑↑↑↑↑
             // Asegúrate que la URL esté entre las comillas simples ' '
 
-            if (googleScriptWebAppUrl === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUÍ' || googleScriptWebAppUrl === '') {
-                console.warn('URL de Google Apps Script no configurada. El pedido no se guardará en la hoja de cálculo.');
-                // Opcionalmente, notificar al usuario que no se guardará en Sheets
-                // showNotification("Configuración pendiente: Pedido no guardado en hoja de cálculo.", "error");
-                return; // No continuar si la URL no está configurada
-            }
+             // Validación básica de la URL
+             if (!googleScriptWebAppUrl || googleScriptWebAppUrl === '') {
+        console.warn('URL de Google Apps Script no configurada. El pedido NO se guardará en la hoja de cálculo.');
+        return {success: false, message: 'URL no configurada'};
+    }
 
             try {
                 const response = await fetch(googleScriptWebAppUrl, {
                     method: 'POST',
-                    mode: 'cors', // Esencial para que el script pueda leer la respuesta
-                    cache: 'no-cache',
+                    mode: 'no-cors', // Esencial para que el navegador permita la solicitud cross-origin
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/json', // Indicar que enviamos JSON
                     },
-                    redirect: 'follow', // Seguir redirecciones si las hay (Apps Script a veces redirige)
-                    body: JSON.stringify(formData),
+                    body: JSON.stringify(formData), // Convertir el objeto a JSON string
                 });
 
-                // Verificar si la respuesta es OK y es JSON antes de intentar parsearla
-                if (response.ok) {
-                    const contentType = response.headers.get("content-type");
-                    if (contentType && contentType.indexOf("application/json") !== -1) {
-                        const result = await response.json();
-                        if (result.status === 'success') {
-                            console.log('Pedido enviado y guardado en Google Sheet:', result.message);
-                            // No necesitamos notificar al usuario aquí, ya se notifica el envío a WhatsApp
-                        } else {
-                            console.error('Error reportado por Google Sheet al guardar:', result.message);
-                            showNotification("Error al guardar en hoja de cálculo: " + result.message, "error");
-                        }
-                    } else {
-                         const textResponse = await response.text();
-                         console.warn('Respuesta no JSON de Google Sheet (pero OK):', textResponse);
-                         // Esto puede pasar si el script no devuelve JSON o hay un error HTML.
-                         // Podrías intentar analizarlo si esperas HTML en caso de error del script.
+                // Google Apps Script (si devuelve texto/plain o html en caso de error)
+                const textResponse = await response.text(); // Leer la respuesta como texto primero
+
+                if (response.ok) { // Verifica si el estado de la respuesta es 2xx Success
+                    try {
+                         // Intenta parsear como JSON solo si esperas JSON (tu script sí lo devuelve)
+                         const result = JSON.parse(textResponse);
+                         if (result.result === 'success') { // Asegúrate que 'result' coincida con lo que devuelve tu script
+                             console.log('Pedido enviado y guardado en Google Sheet:', result);
+                             // showNotification("Pedido guardado en hoja de cálculo.", "success"); // Podrías notificar, pero ya notificamos el envío a WhatsApp
+                         } else {
+                             console.error('Error reportado por Google Sheet al guardar:', result);
+                              showNotification("Error al guardar en hoja: " + (result.message || JSON.stringify(result)), "error");
+                         }
+                    } catch (e) {
+                         // Si falla el parseo JSON pero la respuesta fue OK, puede ser HTML de error de Apps Script
+                         console.warn('Respuesta OK pero no JSON de Google Sheet. Posible HTML de error/redirección:', textResponse);
                          if (textResponse.toLowerCase().includes("error") || textResponse.toLowerCase().includes("excepción")) {
-                            showNotification("Error en script de hoja de cálculo (respuesta no JSON).", "error");
+                              showNotification("Error en script de hoja de cálculo (respuesta no JSON).", "error");
+                         } else {
+                             // Podría ser una respuesta esperada que no es JSON
+                             console.log('Respuesta OK no JSON esperada:', textResponse);
+                             // showNotification("Pedido procesado (sin confirmación JSON).", "info");
                          }
                     }
-                } else {
-                    // Si la respuesta no es OK (ej. 404, 500, error de CORS si no está bien configurado el script)
-                    const errorText = await response.text(); // Intentar obtener más detalles del error
-                    console.error('Error en la solicitud a Google Sheet:', response.status, response.statusText, errorText);
-                    showNotification(`Error (${response.status}) al contactar la hoja de cálculo.`, "error");
                 }
             } catch (error) {
                 console.error('Excepción al enviar el pedido a Google Sheet:', error);
-                showNotification("No se pudo conectar con la hoja de cálculo.", "error");
+                // Este catch maneja errores de red, fallos de CORS, etc.
+                 showNotification("No se pudo conectar con la hoja de cálculo.", "error");
             }
         }
+        // --- FIN FUNCIÓN sendOrderToGoogleSheet ---
 
 
         whatsappForm.addEventListener('submit', async function(e) { // Hacer la función async para await sendOrderToGoogleSheet
@@ -2774,11 +2773,11 @@
                 showNotification("Por favor, selecciona el tipo de pedido.", "error");
                 methodInput.focus(); return;
             }
-            if (method === 'Mesa' && !table) {
-                showNotification("Por favor, ingresa el número de mesa.", "error");
-                tableInput.focus(); return;
-            }
-             if (method === 'Mesa' && (isNaN(parseInt(table)) || parseInt(table) < 1 || parseInt(table) > 20 )) {
+             if (method === 'Mesa' && !table) { // Validar que la mesa no esté vacía si el método es 'Mesa'
+                 showNotification("Por favor, ingresa el número de mesa.", "error");
+                 tableInput.focus(); return;
+             }
+            if (method === 'Mesa' && (isNaN(parseInt(table)) || parseInt(table) < 1 || parseInt(table) > 20 )) {
                 showNotification("Número de mesa inválido (debe ser entre 1 y 20).", "error");
                 tableInput.focus(); return;
             }
@@ -2795,34 +2794,35 @@
                 if (!item.isByWeight && item.quantity > 1) {
                      itemName += ` (x${item.quantity})`;
                 }
-                return `🌮 ${sanitizeInput(itemName)} - $${item.price.toFixed(2)}`;
+                return ` ${sanitizeInput(itemName)} - $${item.price.toFixed(2)}`;
             }).join('%0A');
 
             const totalPedido = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
 
-            const pedidoDetalleParaSheet = cart.map(item => {
-                 let itemName = item.name;
-                 if (!item.isByWeight && item.quantity > 1) {
-                     itemName += ` (x${item.quantity})`;
-                 }
-                 return `${sanitizeInput(itemName)} - $${item.price.toFixed(2)}`;
-            }).join('; ');
-
-
+             // Preparar los datos para la hoja de cálculo - Usar las mismas keys que tu script Apps Script espera
             const formDataForSheet = {
                 timestamp: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }),
-                nombre: name,
-                tipoPedido: method,
-                mesa: table || "N/A",
-                pedidoDetalle: pedidoDetalleParaSheet,
-                total: parseFloat(totalPedido), // Enviar como número
-                notas: notes || 'Ninguna'
+                name: name,      // <-- Usar 'name' como en tu script anterior
+                method: method,  // <-- Usar 'method' como en tu script anterior
+                table: table || "N/A", // <-- Usar 'table' como en tu script anterior
+                order: itemsTextForWhatsapp.replace(/%0A/g, '; '), // <-- Usar 'order' como en tu script anterior, y reemplazar saltos de línea por ';'
+                total: parseFloat(totalPedido), // <-- Usar 'total' como en tu script anterior, enviar como número
+                notes: notes || 'Ninguna' // <-- Usar 'notes' como en tu script anterior
             };
 
-            // Enviar a Google Sheet y esperar (opcionalmente)
-            await sendOrderToGoogleSheet(formDataForSheet); // La función sendOrderToGoogleSheet ya maneja sus propios errores/notificaciones
+            // Enviar a Google Sheet usando la función fetch
+            // Await aquí hará que el código espere a que termine el envío a Sheets antes de abrir WhatsApp
+            // Si prefieres abrir WhatsApp inmediatamente y que el envío a Sheets sea en segundo plano, remueve await.
+            sendOrderToGoogleSheet(formDataForSheet);
 
-            const whatsappNumber = "5217772073675"; // Asegúrate que el número esté en formato internacional completo sin + ni espacios/guiones
+
+            // --- Número de WhatsApp fijo ---
+            const whatsappNumber = "527772400773"; // <-- TU NÚMERO DE WHATSAPP AQUÍ
+            // --- FIN Número fijo ---
+
+
+            // Preparar y abrir el enlace de WhatsApp
+            // El número ahora se usa directamente de la variable whatsappNumber definida arriba
             const whatsappMessage = `*PEDIDO - EL BOTUDO*%0A%0A` +
                 `*👤 Cliente:* ${encodeURIComponent(name)}%0A` +
                 `${method === 'Mesa' ? `🪑 *Mesa:* ${encodeURIComponent(table)}` : '🚚 *Para llevar*'}` +
@@ -2830,6 +2830,7 @@
                 `*💰 Total:* $${totalPedido}%0A%0A` +
                 `*📝 Notas:* ${encodeURIComponent(notes || 'Ninguna')}`;
 
+            // Abrir WhatsApp en una nueva ventana/tab
             window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
 
             // Retrasar un poco para dar tiempo a que WhatsApp se abra antes de mostrar la notificación de éxito final
@@ -2837,23 +2838,32 @@
                 closeModal();
                 cart = []; // Limpiar carrito
                 localStorage.removeItem('taqueriaCart');
-                updateWhatsappOrderSummary(); // Actualizar UI del carrito
+                updateWhatsappOrderSummary(); // Actualizar UI del carrito y ocultar botón si está vacío
 
                 whatsappForm.reset(); // Limpiar formulario
                 tableField.style.display = 'none';
                 document.getElementById('whatsapp-table').removeAttribute('required');
+                 document.getElementById('whatsapp-table').value = ''; // Limpiar el valor de la mesa también
 
+                // Puedes mostrar una notificación indicando que el pedido fue enviado (a WhatsApp)
                 showNotification("¡Pedido enviado por WhatsApp! Gracias.", "success");
 
                 submitButton.disabled = false;
                 submitButton.innerHTML = '<i class="fab fa-whatsapp"></i> Enviar Pedido';
-            }, 1800);
+
+            }, 1800); // Espera 1.8 segundos
+
         });
+        // --- FIN listener formulario whatsappForm ---
+
+
+        // ... (El resto de tu JavaScript, incluyendo initCart, attachCartItemEventListeners, handleDeleteItem, handleDecreaseQuantity, handleIncreaseQuantity, updateCartAndStorage, animateButton, sanitizeInput, showNotification) ...
 
         document.addEventListener('DOMContentLoaded', function() {
              initCart();
              animateOnScroll(); // Para las animaciones iniciales al cargar
         });
+
 
     </script>
 </body>
