@@ -2442,7 +2442,7 @@
                         <select id="whatsapp-method" required>
                             <option value="">Seleccionar...</option>
                             <option value="Mesa">Comer en local</option>
-                            <option value="Recoger">Para llevar</option>
+                            <option value="Para llevar">Para llevar</option>
                         </select>
                     </div>
                     <div class="whatsapp-form-group" id="tableField" style="display: none;">
@@ -3189,7 +3189,7 @@
 
             // Enviar por WhatsApp
             // REEMPLAZA "TU_NUMERO_DE_WHATSAPP" CON EL NÚMERO REAL
-            const whatsappNumber = "TU_NUMERO_DE_WHATSAPP"; // Ejemplo: "5217771234567" (código de país + número)
+            const whatsappNumber = "527772400773"; // Ejemplo: "5217771234567" (código de país + número)
             const whatsappMessage = `*PEDIDO - EL BOTUDO*%0A%0A` +
                 `*👤 Cliente:* ${encodeURIComponent(name)}%0A` +
                 `${method === 'Mesa' ? `🪑 *Mesa:* ${encodeURIComponent(table)}` : '🚚 *Para llevar*'}` + // Condicional para Mesa o Para llevar
@@ -3199,7 +3199,6 @@
 
              // Usar window.location.href en lugar de window.open para mayor compatibilidad en móviles
               window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
-             //window.location.href = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 
 
             // Limpiar y cerrar después de un breve retraso
